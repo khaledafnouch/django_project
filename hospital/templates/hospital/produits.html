@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static  %}
+{% load i18n %}
+   {% block title  %} produits {% endblock %}
+
+
+   
+   {%  block content %}
+ 
+
+
+   <div class="row">
+      <div class="col-md-12">
+        <div class="card card-sm">
+          <form method="get">
+            <div class="card-body row no-gutters align-items-center">
+              <div class="col">
+                <input type="search" name="item-name" placeholder="entrer le nom de produit que vous cherchez" class="form-control">
+    
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-success">recherche</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      {%  for produit in allproduit %}
+      <div class="col-md-3">
+        <div class="card">
+          <img src="{{ produit.image  }}" alt="" class="card-ing-top" >
+          <div class="card-body">
+            <div id="aa{{ produit.id }}" class="card-title" style="display: flex; justify-content:space-between"><span><h5>nom produit:</h5> </span> {{ produit.title  }}</div>
+            <div id="price{{ product.id }}" class="card-text" style="display: flex; justify-content:space-between;  color:orange;"><span><h5>prix:</h5> </span>  $ {{ produit.price }}</div>
+            <a href="{{  produit.id }}" class="btn btn-danger">Voire</a>
+            <button id="{{ produit.id }}" class="btn td btn-success">Ajouter</button>
+          </div>
+        </div>
+      </div>
+      {% endfor %} 
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-3 offset-md-4">
+        
+        <ul class="pagination">
+          {%  if allproduit.has_previous    %}
+            <li class="page-item">
+              <a href="?page={{ allproduit.previous_page_number }}" class="page-link">precedent</a>
+            </li>
+          {%  endif  %}
+          <li class="page-item">
+            <a href="?page={{ allproduit.number }}" class="page-link">{{ allproduit.number }}</a>
+          </li>
+          {%  if allproduit.has_next   %}
+            <li class="page-item">
+              <a href="?page={{ allproduit.next_page_number }}" class="page-link">suivant</a>
+            </li>
+          {%  endif  %}
+          
+        </ul>
+        
+      </div>
+      
+    </div>
+   
+   {%    endblock  %}
+
+   {%  block js  %} 
+   
+   <script type="text/javascript">
+      if(localStorage.getItem('panier')== null){
+         var panier = {};
+      }else{
+         panier = JSON.parse(localStorage.getItem('panier'));
+      }
+      $(document).on('click', '.td', function(){
+         var item_id = this.id.toString();
+         console.log(item_id);
+         if(panier[item_id] != undefined){
+            panier[item_id] += 1;
+         
+         }else{
+            panier[item_id] = 1;
+         }
+         console.log(panier);
+         localStorage.setItem('panier',JSON.stringify(panier));
+         console.log(Object.keys(panier).length );
+         document.getElementById("panier").innerHTML = "Panier("+  Object.keys(panier).length  + ")";
+         
+      })
+      $(function () {
+              $('[data-toggle="popover"]').popover();
+              document.getElementById('panier').setAttribute('data-content', '<h5>Voici votre liste </h5>');
+          })
+          AfficherList(panier);
+        function AfficherList(panier){
+            var panierString = " ";
+            panierString += "<h5>Voici votre liste</h5>";
+            var index = 1;
+            for(var x in panier){
+                panierString += index;
+                panierString += document.getElementById("aa"+x).innerHTML + " Qte: "+ panier[x][0] + "</br>";
+                index +=1;
+            }
+            panierString += "<a href='/checkout' class='btn btn-primary'>Checkout</a>";
+            $('[data-toggle="popover"]').popover();
+            document.getElementById('panier').setAttribute('data-content', panierString);
+        }
+   </script>
+   
+   
+   {% endblock  %}    

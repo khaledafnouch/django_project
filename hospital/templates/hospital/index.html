@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static  %}
+{% load i18n %}
+   {% block title  %} index {% endblock %}
+
+
+   
+   {%  block content %}
+ 
+                
+   <div class="hero-wrap">
+    <div class="home-slider owl-carousel">
+        <div class="slider-item" style="background-image:url({% static 'images/bg_1.jpg' %});">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text align-items-center justify-content-end">
+                    <div class="col-md-6 ftco-animate">
+                        <div class="text w-100">
+                            <h1 class="mb-4">Bienvenue à l'hôpital Regionale de Bengardane</h1>
+                            <p>Loin loin, derrière le mot montagnes, loin des pays Vokalia et Consonantia, vivent les textes aveugles.</p>
+                            <p><a href="#appointment" class="btn btn-primary">Prenez rendez-vous</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-item" style="background-image:url({% static 'images/bg_2.jpg'  %});">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text align-items-center justify-content-end">
+                    <div class="col-md-6 ftco-animate">
+                        <div class="text w-100">
+                            <h1 class="mb-4">Bienvenue à l'hôpital Regionale de Bengardane</h1>
+                            <p>La vigilance fait partie de la qualité garantie à l'hôpital.</p>
+                            <p><a href="#appointment" class="btn btn-primary">Prenez rendez-vous</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-appointment ftco-section ftco-no-pt ftco-no-pb" id="ftco-appointment">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row d-md-flex justify-content-center">
+            <div class="col-md-12">
+                <div class="wrap-appointment d-md-flex">
+                    <div class="col-md-8 bg-primary p-5 heading-section heading-section-white">
+                        <span class="subheading">Prise de rendez-vous</span>
+                        <h2 class="mb-4">Consultation gratuite</h2>
+                        <form action="#" method="post" class="appointment" id="appointment">
+                          {% csrf_token %}
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="name" class="form-control" placeholder="Your Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="phone" class="form-control" placeholder="Phone number">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="form-field">
+                                            <div class="select-wrap">
+                                                <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                                                <select name="services" id="" class="form-control">
+                                  <option value="">Sélectionnez les services</option>
+                                <option value="Manipulation">Manipulation vertébrale</option>
+                                <option value="Electrotherapy">Électrothérapie</option>
+                                <option value="lymphatique ">Manuel Lymphatique</option>
+                                <option value="acupuncture ">Acupuncture médicale</option>
+                                <option value="thérapeutique">Exercice thérapeutique</option>
+                                <option value="Mobilisation">Mobilisation conjointe</option>
+                              </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="form-field">
+                                            <div class="select-wrap">
+                                                <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                                                <select name="docteur" id="" class="form-control">
+                                  <option value="">Sélectionnez docteur</option>
+                                <option value="john">John Doe</option>
+                                <option value="William">William Smith</option>
+                                <option value="Danny">Danny Green</option>
+                                <option value="Jason">Jason Thompson</option>
+                              </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-wrap">
+                                            <div class="icon"><span class="fa fa-clock-o"></span></div>
+                                            <input type="datetime" name="time" class="form-control appointment_date" placeholder="Time">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="submit" name="submit" value="envoyer message" class="btn btn-secondary py-3 px-4">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-4 bg-white text-center p-5">
+                        <div class="desc border-bottom pb-4">
+                            <h2>Heures de travail</h2>
+                            <div class="opening-hours">
+                                <h4>Jours d'ouverture:</h4>
+                                <p class="pl-3">
+                                    <span><strong>Lundi -- vendredi:</strong> 9am to 20 pm</span>
+                                    <span><strong>Samedi :</strong> 9am to 17 pm</span>
+                                </p>
+                                <h4>Vacances:</h4>
+                                <p class="pl-3">
+                                    <span>Tous les dimanches</span>
+                                    <span>Tous les jours fériés officiels</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="desc pt-4 ">
+                            <h3 class="heading">Pour les cas d'urgence</h3>
+                            <span class="phone">(+216) 123 456 7890</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+  
+            
+          
+                {%  endblock %}
+                
+
+            
